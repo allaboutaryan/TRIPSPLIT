@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripSplit - Expense Sharing for Students</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-route"></i>
+                <h1>TripSplit</h1>
+            </div>
+            <nav class="nav">
+                <button class="btn-primary" onclick="showCreateGroup()">
+                    <i class="fas fa-plus"></i> New Trip
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="dashboard-header">
+                <h2>Your Trips</h2>
+                <div class="stats">
+                    <div class="stat-card">
+                        <i class="fas fa-wallet"></i>
+                        <div>
+                            <h3 id="totalOwed">₹0</h3>
+                            <p>You Owe</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <div>
+                            <h3 id="totalOwedTo">₹0</h3>
+                            <p>Owed to You</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="trips-container" id="tripsContainer">
+                <!-- Trips will be dynamically added here -->
+            </div>
+        </section>
+
+        <!-- Trip Details Section -->
+        <section id="tripDetails" class="section">
+            <div class="trip-header">
+                <button class="back-btn" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <h2 id="tripTitle">Trip Details</h2>
+                <button class="btn-primary" onclick="showAddExpense()">
+                    <i class="fas fa-plus"></i> Add Expense
+                </button>
+            </div>
+            
+            <div class="trip-summary">
+                <div class="summary-card">
+                    <h3>Trip Balance</h3>
+                    <div id="tripBalance">₹0</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Total Expenses</h3>
+                    <div id="tripTotal">₹0</div>
+                </div>
+            </div>
+
+            <div class="members-section">
+                <h3>Members</h3>
+                <div id="membersContainer" class="members-list">
+                    <!-- Members will be added here -->
+                </div>
+            </div>
+
+            <div class="expenses-section">
+                <h3>Recent Expenses</h3>
+                <div id="expensesContainer" class="expenses-list">
+                    <!-- Expenses will be added here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Create Group Modal -->
+    <div id="createGroupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Trip</h3>
+                <button class="close-btn" onclick="hideCreateGroup()">&times;</button>
+            </div>
+            <form id="createGroupForm">
+                <div class="form-group">
+                    <label>Trip Name</label>
+                    <input type="text" id="groupName" placeholder="Goa Trip 2025" required>
+                </div>
+                <div class="form-group">
+                    <label>Add Members (comma separated)</label>
+                    <input type="text" id="memberNames" placeholder="Rahul, Priya, Amit" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="hideCreateGroup()" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Trip</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Expense Modal -->
+    <div id="addExpenseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Expense</h3>
+                <button class="close-btn" onclick="hideAddExpense()">&times;</button>
+            </div>
+            <form id="addExpenseForm">
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" id="expenseDescription" placeholder="Dinner at Restaurant" required>
+                </div>
+                <div class="form-group">
+                    <label>Amount (₹)</label>
+                    <input type="number" id="expenseAmount" placeholder="500" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="expenseCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="food">Food & Dining</option>
+                        <option value="transport">Transport</option>
+                        <option value="accommodation">Accommodation</option>
+                        <option value="activities">Activities</option>
+                        <option value="shopping">Shopping</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Paid By</label>
+                    <select id="paidBy" required>
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Split Between</label>
+                    <div id="splitMembers" class="checkbox-group">
+                        <!-- Checkboxes will be added dynamically -->
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="hideAddExpense()" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Expense</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Success!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
